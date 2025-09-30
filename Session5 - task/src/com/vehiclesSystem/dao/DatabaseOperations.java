@@ -15,7 +15,6 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-@Scope("singleton")
 @Repository
 @Setter
 @Getter
