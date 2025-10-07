@@ -1,6 +1,15 @@
 <html>
-<body>
-    <h1>Hello to Age Calculator App</h1>
-    <h3>your age is: ${year} year , ${month} month , ${day} day</h3>
+<head>
+
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/resources/css/style.css">
+</head>
+<body >
+    <h1 >Hello to Student App</h1>
+    <h3>year is : ${year} </h3>
+    <h3>month is : ${month} </h3>
+    <h3>day is : ${day} </h3>
 </body>
 </html>
+
+

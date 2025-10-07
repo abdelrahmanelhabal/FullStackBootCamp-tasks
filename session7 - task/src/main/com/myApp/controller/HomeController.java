@@ -3,12 +3,11 @@ package main.com.myApp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
-import java.time.temporal.ChronoUnit;
+import java.time.Period;
 
 @Controller
 public class HomeController
@@ -23,22 +22,21 @@ public class HomeController
     @RequestMapping("/processForm")
     public String processForm(HttpServletRequest request , Model model)
     {
-        //getting parameters from request
-        String year = request.getParameter("year");
-        String month = request.getParameter("month");
-        String day = request.getParameter("day");
+        int year = Integer.parseInt(request.getParameter("year"));
+        int month = Integer.parseInt(request.getParameter("month"));
+        int day = Integer.parseInt(request.getParameter("day"));
 
-        //processing the data that received from the request
-        int yearsDifference = LocalDate.now().getYear() -  Integer.parseInt(year);
-        int monthsDifference = LocalDate.now().getMonthValue() -  Integer.parseInt(month);
-        int daysDifference = LocalDate.now().getDayOfMonth() -  Integer.parseInt(day);
+        LocalDate userDDB =  LocalDate.of(year, month, day);
+        LocalDate now = LocalDate.now();
 
-        //adding data to the model
-        model.addAttribute("year" , yearsDifference);
-        model.addAttribute("month" , monthsDifference);
-        model.addAttribute("day" , daysDifference);
+        Period period = Period.between(userDDB, now);
 
-        //return the view with model
+        model.addAttribute("year" , period.getYears());
+        model.addAttribute("month" , period.getMonths());
+        model.addAttribute("day" , period.getDays());
+
         return "resultPage";
     }
 }
+
+
