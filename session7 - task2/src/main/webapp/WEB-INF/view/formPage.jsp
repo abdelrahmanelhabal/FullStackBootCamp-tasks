@@ -11,12 +11,12 @@
         <form action="processForm" method="get">
             <div class="form-group">
                 <label for="first name">First name</label>
-                <input type="text" class="form-control"  name="first name" placeholder="Enter your first name">
+                <input type="text" class="form-control"  name="firstName" placeholder="Enter your first name">
             </div>
 
             <div class="form-group">
                 <label for="last name">Last Name</label>
-                <input type="text" class="form-control"  name="last name" placeholder="Enter your last name">
+                <input type="text" class="form-control"  name="lastName" placeholder="Enter your last name">
             </div>
 
             <div class="form-group">

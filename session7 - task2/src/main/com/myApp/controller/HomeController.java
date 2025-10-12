@@ -1,8 +1,7 @@
 package main.com.myApp.controller;
 
-import main.dao.UserDao;
 import main.model.UserModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import main.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +12,8 @@ import java.time.LocalDate;
 @Controller
 public class HomeController
 {
-    @Autowired
-    UserDao userDao ;
-    @Autowired
-    UserModel userModel;
+
+    UserService userService;
 
     @RequestMapping("/")
     public String showHomePage()
@@ -27,8 +24,8 @@ public class HomeController
     @RequestMapping("/processForm")
     public String processForm(HttpServletRequest request , Model model)
     {
-        String firstName = request.getParameter("first name");
-        String lastName = request.getParameter("last name");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
         String date = request.getParameter("date");
         String City = request.getParameter("city");
@@ -39,19 +36,9 @@ public class HomeController
             System.out.println("Invalid date format: " + date);
         }
 
-        userModel.setFirstName(firstName);
-        userModel.setLastName(lastName);
-        userModel.setEmail(email);
-        userModel.setBirthDate(birthDate);
-        userModel.setCity(City);
-
-        userDao.save(userModel);
-
-        model.addAttribute("firstName", firstName);
-        model.addAttribute("lastName", lastName);
-        model.addAttribute("email", email);
-        model.addAttribute("birthDate", birthDate);
-        model.addAttribute("City", City);
+        userService.createUser(firstName, lastName, email, birthDate, City);
+        UserModel user = new UserModel(firstName, lastName, email, birthDate, City);
+        model.addAttribute("user", user);
 
         return "resultPage";
     }

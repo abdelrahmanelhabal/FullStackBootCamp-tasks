@@ -2,9 +2,7 @@ package main.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 import java.time.LocalDate;
-@Component
 @Setter
 @Getter
 public class UserModel {
@@ -14,4 +12,11 @@ public class UserModel {
     String email ;
     LocalDate birthDate ;
     String city ;
+  public UserModel(String firstName, String lastName, String email, LocalDate birthDate, String city) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.city = city;
+    }
 }
