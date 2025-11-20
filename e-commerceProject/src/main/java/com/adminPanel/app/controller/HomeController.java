@@ -24,7 +24,7 @@ public class HomeController {
         sdf.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
     }
-    @RequestMapping("/add")
+    @PostMapping("/add")
     public String addProduct(Model model) {
         ProductDetails productDetails = new  ProductDetails();
         model.addAttribute("productDetailsModel",productDetails );
@@ -32,13 +32,13 @@ public class HomeController {
     }
 
 
-    @RequestMapping
+    @GetMapping
     public String listProducts(Model model) {
         model.addAttribute("products", productService.getAll());
         return "list";
     }
 
-    @RequestMapping("/edit/{id}")
+    @GetMapping("/edit/{id}")
     public String addProduct(@PathVariable int id,Model model) {
         ProductDetails productDetails = productService.get(id).getProductDetails();
         System.out.println(productDetails);
@@ -60,7 +60,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/showDetails/{id}")
+    @GetMapping("/showDetails/{id}")
     public String showDetails(@PathVariable int id,Model model) {
         ProductDetails productDetails = productService.get(id).getProductDetails();
         if (productDetails == null) {
@@ -70,7 +70,7 @@ public class HomeController {
         return "show";
     }
 
-    @RequestMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable int id) {
         productService.delete(id);
         return "redirect:/";

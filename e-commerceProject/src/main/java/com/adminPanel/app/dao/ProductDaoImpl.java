@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.Query;
 import java.util.List;
 @Repository
-public class DaoImpi implements Dao{
+public class ProductDaoImpl implements Dao{
 
     @Override
     public List<Product> getProducts() {
@@ -33,11 +33,8 @@ public class DaoImpi implements Dao{
             if (product.getProductDetails() == null){
                 throw new RuntimeException("product details not found with product id: " + id);
             }
-            Query query = session.createQuery("delete from ProductDetails where id=:i");
-            query.setParameter("i",product.getProductDetails().getId());
-            query.executeUpdate();
 
-            query = session.createQuery("delete from Product where id=:i");
+            Query query = session.createQuery("delete from Product where id=:i");
             query.setParameter("i",id);
             query.executeUpdate();
 

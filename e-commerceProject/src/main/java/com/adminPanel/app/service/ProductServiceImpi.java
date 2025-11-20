@@ -1,6 +1,6 @@
 package com.adminPanel.app.service;
 
-import com.adminPanel.app.dao.DaoImpi;
+import com.adminPanel.app.dao.ProductDaoImpl;
 import com.adminPanel.app.model.Product;
 import com.adminPanel.app.model.ProductDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import java.util.List;
 public class ProductServiceImpi implements ProductService {
 
     @Autowired
-    DaoImpi  daoImpi;
+    ProductDaoImpl daoImpi;
 
     @Override
     public List<Product> getAll() {
@@ -31,7 +31,6 @@ public class ProductServiceImpi implements ProductService {
 
     @Override
     public void create(ProductDetails productDetails) {
-        validation(productDetails);
         Product product = new Product(productDetails.getName());
         productDetails.setProduct_id(product);
         daoImpi.addProduct(productDetails);
@@ -40,21 +39,5 @@ public class ProductServiceImpi implements ProductService {
     @Override
     public Product get(int id) {
         return daoImpi.getProductById(id);
-    }
-    private void validation(ProductDetails product) {
-        if (product.getName().trim().isEmpty()) {
-            throw new IllegalArgumentException("Product name cannot be empty.");
-        }
-        if (product.getPrice() <= 0) {
-            throw new IllegalArgumentException("Product price must be greater than zero.");
-        }
-
-        List<Product> existingProducts = daoImpi.getProducts();
-        for (Product p : existingProducts) {
-            if (p.getName().equalsIgnoreCase(product.getName()) &&
-                    (product.getId() == 0 || p.getId() != product.getId())) {
-                throw new IllegalArgumentException("Product name must be unique.");
-            }
-        }
     }
 }

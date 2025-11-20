@@ -17,7 +17,7 @@ public class ProductDetails {
     private int id ;
 
     @NotBlank(message = "Name is required")
-    @Column(name = "name")
+    @Column(name = "name" , unique = true)
     private String name ;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -37,7 +37,7 @@ public class ProductDetails {
     @NotNull(message = "Price is required")
     @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
     @Column(name = "price")
-    double price ;
+    private Double price ;
 
     @NotNull(message = "Availability is required")
     @Column(name = "available")
