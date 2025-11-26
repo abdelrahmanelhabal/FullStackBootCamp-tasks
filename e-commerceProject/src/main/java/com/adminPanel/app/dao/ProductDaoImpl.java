@@ -33,8 +33,11 @@ public class ProductDaoImpl implements Dao{
             if (product.getProductDetails() == null){
                 throw new RuntimeException("product details not found with product id: " + id);
             }
+            Query query = session.createQuery("delete from ProductDetails where id=:i");
+            query.setParameter("i",product.getProductDetails().getId());
+            query.executeUpdate();
 
-            Query query = session.createQuery("delete from Product where id=:i");
+            query = session.createQuery("delete from Product where id=:i");
             query.setParameter("i",id);
             query.executeUpdate();
 
