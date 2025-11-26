@@ -24,7 +24,7 @@ public class HomeController {
         sdf.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
     }
-    @PostMapping("/add")
+    @GetMapping("/add")
     public String addProduct(Model model) {
         ProductDetails productDetails = new  ProductDetails();
         model.addAttribute("productDetailsModel",productDetails );
